@@ -15,7 +15,7 @@ DEFAULT_ARGS = {
     'poke_interval': 600
 }
 
-with DAG("ds_test"
+with DAG("s-morozova1",
     schedule_interval='@daily',
     default_args=DEFAULT_ARGS,
     max_active_runs=1,
