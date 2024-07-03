@@ -11,7 +11,7 @@ from airflow.operators.python_operator import PythonOperator
 
 DEFAULT_ARGS = {
     'start_date': days_ago(2),
-    'owner': 'd-s',
+    'owner': 's-morozova',
     'poke_interval': 600
 }
 
@@ -19,7 +19,7 @@ with DAG("ds_test"
     schedule_interval='@daily',
     default_args=DEFAULT_ARGS,
     max_active_runs=1,
-    tags=['d-s']
+    tags=['s-morozova']
 ) as dag:
 
     dummy = DummyOperator(task_id="dummy")
