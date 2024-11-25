@@ -1,0 +1,57 @@
+Подготовка к практическим заданиям ✈️
+
+Apache Spark является самым популярным фреймворком для обработки больших данных. Давайте перейдем к практике и попробуем Spark боем. Для работы возьмем реальные данные о выполненных авиа-рейсах (2015 Flight Delays and Cancellations). Авиасообщение является одним из самых сложных механизмов и требующим слаженной организации. Оно активно используется как для перевозки пассажиров так и грузов, а все возникающие инциденты должны решаться мгновенно - так сказать "на лету". Среднее количество самолетов, которые находятся в небе в определенный момент, обычно колеблется в пределах 11-12 тысяч. Это огромное количество данных.
+
+Итак, мы с вами для упрощения будем работать с 50% от основной выборки и подготовили для вас следующие датасеты которые будут использоваться в практике:
+
+    airlines.parquet - файл с данными о авиалиниях
+    airports.parquet - файл с данными о аэропортах
+    flights.parquet - файл с данными о авиарейсах
+
+Структура данных
+Авиалинии
+Колонка	Тип	Описание
+IATA_CODE	String	Идентификатор авиалинии
+AIRLINE	String	Название авиалинии
+Аэропорты
+Колонка	Тип	Описание
+IATA_CODE	String	Идентификатор аэропорта
+AIRPORT	String	Название аэропорта
+CITY	String	Город
+STATE	String	Штат/Округ
+COUNTRY	String	Страна
+LATITUDE	Float	Широта расположения
+LONGITUDE	Float	Долгота расположения
+Авиарейсы
+Колонка	Тип	Описание
+YEAR	Integer	Год полета
+MONTH	Integer	Месяц полета
+DAY	Integer	День полета
+DAY_OF_WEEK	Integer	День недели полета [1-7] = [пн-вс]
+AIRLINE	String	Код авиалиний
+FLIGHT_NUMBER	String	Идентификатор рейса (просто ид)
+TAIL_NUMBER	String	Номер рейса
+ORIGIN_AIRPORT	String	Код аэропорта отправления
+DESTINATION_AIRPORT	String	Код аэропорта назначения
+SCHEDULED_DEPARTURE	Integer	Время запланированного отправления
+DEPARTURE_TIME	Integer	Время фактического отправления WHEEL_OFF - TAXI_OUT
+DEPARTURE_DELAY	Integer	Общая задержка отправления
+TAXI_OUT	Integer	Время, прошедшее между отправлением от выхода на посадку в аэропорту отправления и вылетом
+WHEELS_OFF	Integer	Момент времени, когда колеса самолета отрываются от земли
+SCHEDULED_TIME	Integer	Запланированное количество времени, необходимое для полета
+ELAPSED_TIME	Integer	AIR_TIME+TAXI_IN+TAXI_OUT
+AIR_TIME	Integer	Время в воздухе. Промежуток времени между WHEELS_OFF и WHEELS_ON
+DISTANCE	Integer	Расстояние между двумя аэропортами
+WHEELS_ON	Integer	Момент времени, когда колеса самолета касаются земли
+TAXI_IN	Integer	Время, прошедшее между посадкой на колеса и прибытием на посадку в аэропорту назначения
+SCHEDULED_ARRIVAL	Integer	Планируемое время прибытия
+ARRIVAL_TIME	Integer	Время когда самолет фактически прибыл в аэропорт (прибыл к гейту) WHEELS_ON+TAXI_IN
+ARRIVAL_DELAY	Integer	Время задержки в прибытии ARRIVAL_TIME-SCHEDULED_ARRIVAL
+DIVERTED	Integer	Флаг указывающий что рейс приземлился в аэропорту не по расписанию (0/1)
+CANCELLED	Integer	Флаг указывающий что рейс был отменен (0/1)
+CANCELLATION_REASON	String	Причина отмены рейса: A - Airline/Carrier; B - Weather; C - National Air System; D - Security
+AIR_SYSTEM_DELAY	Integer	Время задержки из-за воздушной системы
+SECURITY_DELAY	Integer	Время задержки из-за службы безопасности
+AIRLINE_DELAY	Integer	Время задержки по вине авиакомпании
+LATE_AIRCRAFT_DELAY	Integer	Время задержки из-за проблем самолета
+WEATHER_DELAY	Integer	Время задержки из-за погодных условий
